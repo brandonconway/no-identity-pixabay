@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+	<head>
+	  <meta charset="utf-8" />
+	  <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+	  <title>No Identity</title>
+	  <link rel="stylesheet" href="./css/base.css" type="text/css" media="all">
+	</head>
+	<body>
+	  <div id="main">
+      <audio controls src="./assets/song3.m4a"></audio>
+    </div>
+
+    <script src="./node_modules/systemjs/dist/system.src.js"></script>
+		<script src="./systemjs.config.js"></script>
+		<script>
+		  System.import('./app/main.js').catch(function (error) {
+				       console.error(error);
+			});
+		</script>
+	</body>
+</html>

@@ -1,0 +1,14 @@
+{
+    "name": "No Identity",
+    "version": "1.0.0dev",
+    "description": "Web-based song visualizer",
+    "repository": "",
+    "license": "UNLICENSED",
+    "dependencies": {
+        "babel-core": "^6.13.2",
+        "core-js": "^2.4.0",
+        "systemjs": "^0.19.37",
+        "systemjs-builder": "^0.15.29",
+        "systemjs-plugin-babel": "^0.0.13"
+    }
+}
