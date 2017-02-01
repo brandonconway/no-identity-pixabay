@@ -1,0 +1,14 @@
+body {
+    min-height: 100%;
+    background-color: black;
+    position: relative;
+}
+
+canvas {
+    background-color: black;
+}
+
+audio {
+    position: absolute;
+    bottom: 0;
+}
