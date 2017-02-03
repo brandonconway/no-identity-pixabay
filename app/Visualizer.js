@@ -40,6 +40,7 @@ class Visualizer {
     }
 
     update () {
+        this.t = undefined;
         this.player.addEventListener('timeupdate', () => {this.displayText()});
     }
 
@@ -48,12 +49,14 @@ class Visualizer {
         this.ctx.fillStyle = 'white';
         this.ctx.textAlign="center";
         this.ctx.font = '48px serif';
+
         key = Math.floor(this.player.currentTime);
         if (typeof this.data[key] !== 'undefined'){
             this.word = this.data[key];
             if(this.word != this.last_word){
                 this.last_word = this.word;
                 console.log('changed');
+                console.log(this.t);
                 let http = new Http();
                 let url = `https://pixabay.com/api/?key=4423877-e94fab80133cf77ffe9041cb4&per_page=50&image_type=photo&q=${this.data[key]}`;
                 http.get(url)
@@ -69,15 +72,38 @@ class Visualizer {
     }
 
     render_image(response) {
+
+        function drawThing(alpha, ctx){
+            //ctx.globalAlpha = alpha;
+            ctx.globalCompositeOperation = 'source-over';
+            if (alpha % 4){
+                ctx.globalCompositeOperation = 'xor';
+            }
+            ctx.filter = 'grayscale(100%)';
+            var x = Math.random()*(ctx.canvas.width-50);
+            var y = Math.random() * (ctx.canvas.height-50);
+            var width = (Math.random() * 100) + 50;
+            var height = (Math.random() * 100) + 50;
+            var size  = Math.random() + 1;
+            var width = base_image.width * size;
+            var height = base_image.height * size;
+            ctx.drawImage(base_image, x, y, width, height);
+        }
+
         let most = Math.min(response["totalHits"], 50);
         let choice = Math.floor(Math.random() * most);
         let image_url = response["hits"][choice]["previewURL"];
         let base_image;
-        base_image = new Image();
+        clearInterval(this.t);
+        base_image = new Image(50, 50);
         base_image.src = image_url;
         base_image.onload = () => {
-            this.ctx.drawImage(
-                base_image, Math.random()*this.canvas.width, Math.random() * this.canvas.height);
+            var alpha = 0;
+            this.t = setInterval(() => {
+                        //if(alpha > 1) { alpha = 0; }
+                        alpha++;
+                        drawThing(alpha, this.ctx)}, 20);
+//            setTimeout(() => {clearInterval(t)}, 1000);
         }
     }
 
