@@ -50,7 +50,7 @@ class Visualizer {
         this.ctx.textAlign="center";
         this.ctx.font = '48px serif';
 
-        key = Math.floor(this.player.currentTime);
+        key = Math.floor(this.player.currentTime)+10;
         if (typeof this.data[key] !== 'undefined'){
             this.word = this.data[key];
             if(this.word != this.last_word){
@@ -79,7 +79,7 @@ class Visualizer {
             if (alpha % 4){
                 ctx.globalCompositeOperation = 'xor';
             }
-            ctx.filter = 'grayscale(100%)';
+            //ctx.filter = 'grayscale(100%)';
             var x = Math.random()*(ctx.canvas.width-50);
             var y = Math.random() * (ctx.canvas.height-50);
             var width = (Math.random() * 100) + 50;
